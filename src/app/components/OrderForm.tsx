@@ -1,13 +1,8 @@
-import { PostOrder } from "../api";
+import { PostOrder,GetOrder } from "../api";
 import React, { ChangeEvent, FormEvent, useState, } from "react";
 
 const OrderForm = () => {
 
-
-//submitの関数
-
-
-//
 
     const [product, setproduct] = useState<number>()
     const [num, setnum] = useState<number>()
@@ -24,6 +19,8 @@ const OrderForm = () => {
     {  let changeValue: number =  Number(e.target.value);
       setnum(changeValue)
     };
+
+//submitの関数
 
     const handleSubmit = async (e: FormEvent) => {
       e.preventDefault();

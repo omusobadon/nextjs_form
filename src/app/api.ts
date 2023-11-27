@@ -1,26 +1,36 @@
-import {  Inquiry, Order } from "./types";
+import {  Inquiry, OrderGet, OrderPost } from "./types";
 
 
+const baseUrl = "http://localhost:8080";
 
 
 //購入
 
-
-
-export const PostOrder = async (order: Order): Promise<Order> => {
-    const res = await fetch("http://localhost:8080/post", {
+export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
+    const res = await fetch("${baseUrl}/post", {
         method: "POST",
         mode: "no-cors",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(order),
+        body: JSON.stringify(orderpost),
     });
     const orderLog = res.json();
     console.log(orderLog)
 
     return orderLog;
 };
+
+//在庫情報取得
+
+
+export const GetOrder = async (): Promise<OrderGet[]> => {
+    const res = await fetch(`${baseUrl}/get`, { cache: "no-store" });
+    
+    const ordergetLog = await res.json();
+    return ordergetLog;
+}
+
 
 
 //お問い合わせ

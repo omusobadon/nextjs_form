@@ -5,15 +5,23 @@ import internal from "stream";
 //import internal from "stream";
 
 
-//注文
+//注文POST
 
-export interface Order {
+export interface OrderPost {
 
     customer: number;
     product: number;
     num: number;
 }
 
+//注文GET
+
+export interface OrderGet {
+
+    "id": number;
+    "name": string;
+    "num": number;
+}
 //予約
 
 
