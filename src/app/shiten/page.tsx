@@ -2,7 +2,9 @@ import React from 'react'
 import Link from 'next/link'
 
 
-const page = () => {
+export default function shiten()  {
+
+  
   return (
     <div>
       <Link href={`/`}><button>トップページへ</button></Link>
@@ -18,4 +20,4 @@ const page = () => {
   )
 }
 
-export default page
+

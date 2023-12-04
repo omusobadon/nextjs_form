@@ -1,13 +1,11 @@
 import {  Inquiry, OrderGet, OrderPost } from "./types";
 
 
-const baseUrl = "http://localhost:8080";
-
 
 //購入
 
 export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
-    const res = await fetch("${baseUrl}/post", {
+    const res = await fetch("{POST先URL}", {
         method: "POST",
         mode: "no-cors",
         headers: {
@@ -16,7 +14,6 @@ export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
         body: JSON.stringify(orderpost),
     });
     const orderLog = res.json();
-    console.log(orderLog)
 
     return orderLog;
 };
@@ -25,7 +22,7 @@ export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
 
 
 export const GetOrder = async (): Promise<OrderGet[]> => {
-    const res = await fetch(`${baseUrl}/get`, { cache: "no-store" });
+    const res = await fetch(`http://localhost:8080/get`, { cache: "no-store" });
     
     const ordergetLog = await res.json();
     return ordergetLog;

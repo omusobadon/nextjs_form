@@ -8,10 +8,9 @@ import internal from "stream";
 //注文POST
 
 export interface OrderPost {
-
     customer: number;
-    product: number;
-    num: number;
+    product: number; start: string;
+    end: string; num: number;
 }
 
 //注文GET

@@ -1,9 +1,9 @@
-'use client';
+'use client'
 import { PostInquiry } from '../api';
 import React, { ChangeEvent, FormEvent, useState, } from 'react';
 
 
-export default function honten() {
+export default function Inquiry() {
 
 
     const [Lname, setLName] = useState('')
