@@ -1,124 +1,128 @@
 "use client"
-import { PostOrder,GetOrder } from "../api";
+import { PostOrder,GetOrder } from "../../api";
 import React, { ChangeEvent, FormEvent, useState, } from "react";
+import Link from 'next/link';
 import Image from "next/image";
 
-export default  function page () {
-
-    const [product, setproduct] = useState<number>()
-    const [num, setnum] = useState<number>()
-
-    const [start,setstart] = useState('')
-    const [end,setend] = useState('') 
 
 
 
+export default function page () {
+
+    const [product, setProduct] = useState<number>()
+    const [num, setNum] = useState<number>()
+    const [start,setStart] = useState('')
+    const [end,setEnd] = useState('') 
 
 
 //onChangeの関数
 
-    const changeproduct = (e: ChangeEvent<HTMLInputElement>) =>
+    const changeProduct = (e: React.ChangeEvent<HTMLInputElement>) =>
     {  let changeValue: number =  Number(e.target.value);
-        setproduct(changeValue)
+        setProduct(changeValue)
     };
 
-    const changenum =  (e: ChangeEvent<HTMLInputElement>) =>
+    const changeNum =  (e: React.ChangeEvent<HTMLInputElement>) =>
     {  let changeValue: number =  Number(e.target.value);
-      setnum(changeValue)
+      setNum(changeValue)
     };
 
-    const changestart = (e: ChangeEvent<HTMLInputElement>) =>
-    setstart(e.target.value);
+    const changeStart = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setStart(e.target.value)
 
-    const changeend =  (e: ChangeEvent<HTMLInputElement>) =>
-    setend(e.target.value);
-
+    const changeEnd =  (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEnd(e.target.value);
 
 
 //submitの関数
 
-    const handleSubmit  =  (e: FormEvent) => {
+    const handleSubmit  =  async (e: FormEvent) => {
       e.preventDefault();
   
+//POSTするデータ
 
-         PostOrder({
+    await  PostOrder({
       customer: 1,
       product: product,
-      start: "2021-01-01 01:55:00+00",
-      end: "2021-01-10 01:55:00+00",
-      num : num
-
+      start: start + "+09:00",
+      end: end + "+09:00",
+      num: num
     });
-
   };
-  
+
 
 
   return (
-    
-    <div>
-
+        
+    <>
 
       <form onSubmit={handleSubmit}>
 
-
+<p></p>
 <label>
     <input
           type="radio"
           name="product"
-          onChange={changeproduct}
-          value={"1"}
+          onChange={changeProduct}
+          value={1}
           required
         />
-        CD
+        バス
   </label>
+
 
 <label>
    <input
         type="radio"
         name="product"
-        onChange={changeproduct}
-        value={"2"}
+        onChange={changeProduct}
+        value={2}
         required
     />
-    DVD
+    トラック
 </label>     
+
 
 <label>
    <input
           type="radio"
           name="product"
-          onChange={changeproduct}
-          value={"3"}
+          onChange={changeProduct}
+          value={3}
           required
     />
-    Blu-rayディスク
+    ダンプカー
 </label>
       
 <p></p>
+
         <input
           type="number"
           name="num"
-          onChange={changenum}
+          onChange={changeNum}
           max={80}
           min={1}
           required
         /><label>枚</label>
+        
 <p></p>
-<input
+
+          <input
           type="datetime-local" 
           name="start" 
-          onChange={changestart}
-           step={1}         />
+          onChange={changeStart}
+          step={1}      
+          
+         />
 
           <input
           type="datetime-local"
           name="end" 
-          onChange={changeend}
-          step={1} />
+          onChange={changeEnd}          
+          step={1}
+                />
 
 
-<p></p>
         <button
           type="submit"
           name="submit">
@@ -127,7 +131,7 @@ export default  function page () {
 
       </form>
 
-    </div>
+    </>
   )
 }
 

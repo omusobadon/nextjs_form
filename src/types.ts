@@ -5,20 +5,23 @@ import internal from "stream";
 //import internal from "stream";
 
 
-//注文POST
+//予約POST
 
 export interface OrderPost {
     customer: number;
-    product: number; start: string;
-    end: string; num: number;
+    product: number;
+    start: string;
+    end: string;
+    num: number;
 }
 
-//注文GET
+//予約GET
 
 export interface OrderGet {
 
     "id": number;
     "name": string;
+    "value": number;
     "num": number;
 }
 //予約
@@ -32,12 +35,6 @@ export interface Inquiry {
     Lname: string;
     Fname: string;
     Email: string;
-    FAtel: string;
-    FCtel: string;
-    FLtel: string;
-    CAtel: string;
-    CCtel: string;
-    CLtel: string;
     purpose: string;
     massage: string;
 } 

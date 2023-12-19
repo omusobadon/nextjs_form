@@ -2,10 +2,10 @@ import {  Inquiry, OrderGet, OrderPost } from "./types";
 
 
 
-//購入
+//予約情報送信
 
 export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
-    const res = await fetch("{POST先URL}", {
+    const res = await fetch("http://localhost:8080/post", {
         method: "POST",
         mode: "no-cors",
         headers: {
@@ -14,7 +14,7 @@ export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
         body: JSON.stringify(orderpost),
     });
     const orderLog = res.json();
-
+    
     return orderLog;
 };
 
@@ -23,8 +23,8 @@ export const PostOrder = async (orderpost: OrderPost): Promise<OrderPost> => {
 
 export const GetOrder = async (): Promise<OrderGet[]> => {
     const res = await fetch(`http://localhost:8080/get`, { cache: "no-store" });
-    
     const ordergetLog = await res.json();
+
     return ordergetLog;
 }
 

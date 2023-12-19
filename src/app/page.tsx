@@ -1,17 +1,15 @@
-import React from 'react'
-import Link from 'next/link'
-import { GetOrder } from './api';
+"use client"
+import React from 'react';
+import Header from '../components/Head';
 
-
-export default  function Home() {
-
+export default  function Home () {
 
   return (
-    <div>
-  
-        
-
-    </div>
+    <>
+         <Header />
+ 
+    <p>メンテナンス中</p>
+    </>
   )
 }
 
