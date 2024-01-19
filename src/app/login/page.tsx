@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 
-
 export default function Login() {
   const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
@@ -23,7 +22,6 @@ export default function Login() {
       router.push("/account");
     }
   }, [router, session]);
-  
 
   async function authenticate(
     prevState: string | undefined,
@@ -49,7 +47,9 @@ export default function Login() {
         if (result.error && search === undefined) {
           setErrorMessage("アカウントが見つかりませんでした。");
         } else {
-          setErrorMessage("パスワードが間違っているか、パスワードが設定されていないアカウントです。\nGitHubまたはGoogleでログインしてください");
+          setErrorMessage(
+            "パスワードが間違っているか、パスワードが設定されていないアカウントです。\nGitHubまたはGoogleでログインしてください"
+          );
         }
       }
     } catch (err) {
@@ -57,6 +57,7 @@ export default function Login() {
       if (err instanceof TypeError) {
         if (err.message === "URL constructor: /api/auth is not a valid URL.") {
           console.log("redirect");
+          router.push("/");
         }
       } else {
         return "fail";
@@ -77,6 +78,7 @@ export default function Login() {
       {!session && (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-500">
           <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-xl shadow-lg dark:bg-gray-800">
+            <a href="/" className="hover:underline">←メインサイトに戻る</a>
             <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100">
               オムそばどん予約システム
             </h1>

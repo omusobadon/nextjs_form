@@ -31,12 +31,12 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/account");
+      const isOnDashboard = nextUrl.pathname.match(/\/(shop|account)/); // Fix: Provide a regular expression as an argument
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL("/account", nextUrl));
+        return Response.redirect(new URL("/shop", nextUrl));
       }
       return true;
     },

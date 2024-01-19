@@ -52,15 +52,15 @@ export async function checkEmail(email: string): Promise<boolean> {
     const response = await axios.get<ApiResponse>(
       "http://localhost:8080/get_customer"
     );
-    const customers = response.data.customer; // ここを 'customers' に修正
-    console.log(email);
-    console.log(customers?.some((customer: customerInt) => customer.mail === email) ?? false);
-    return (
-      customers?.some((customer: customerInt) => customer.mail === email) ??
-      false
-    );
-  } catch (error) {
-    console.error("APIリクエストでエラー:", error);
-    throw new Error(`APIリクエストエラー: ${error}`);
+    const customers = response.data.customer;
+    return customers?.some((customer: customerInt) => customer.mail === email) ?? false;
+  } catch (error: any) {
+    console.error("APIリクエストでエラー:", error.message);
+    if (error.response) {
+      // API応答のエラー情報がある場合
+      console.error("エラーステータス:", error.response.status);
+      console.error("エラーボディ:", error.response.data);
+    }
+    throw new Error(`APIリクエストエラー: ${error.message}`);
   }
 }

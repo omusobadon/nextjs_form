@@ -1,7 +1,6 @@
 'use client'
 import { PostInquiry } from '../../api';
 import React, { ChangeEvent, FormEvent, useState, } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import Head from 'next/head';
 import Header from '@/components/Head';
 import Footer from '@/components/Foot';
