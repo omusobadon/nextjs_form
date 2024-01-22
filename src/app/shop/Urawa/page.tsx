@@ -19,7 +19,7 @@ export default function Saitama() {
           StockShop={1}
           StartShop="浦和支店"
            />
-         
+
          <Footer/>
     </>
 

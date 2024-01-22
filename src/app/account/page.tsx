@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { checkEmail } from "@/lib/apidata";
 
@@ -22,8 +23,12 @@ export default function Home() {
           {session.user?.image && (
             <img src={session.user.image} alt="User Image" />
           )}
+
           <button onClick={() => Detalis()}>詳細</button>
           <button onClick={() => signOut()}>ログアウト</button>
+          <Link href={"/"}>
+                <span className="ml-3">戻る</span>
+              </Link>
         </div>
       )}
     </div>

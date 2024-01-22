@@ -235,7 +235,7 @@ export default function Register() {
               <Button
                 className=" bg-white hover:bg-white hover:underline text-black"
                 /* サインアウト後/loginにリダイレクト*/
-                onClick={() => signOut({ callbackUrl: "/login" })}
+                onClick={() => signOut({ callbackUrl: "/" })}
               >
                 Sign Out
               </Button>

@@ -42,14 +42,12 @@ export interface StockGet {
     remark: string
 }
 
-//予約
 
 
 //お問い合わせ
 
 export interface Inquiry {
 
-    id: string;
     Lname: string;
     Fname: string;
     Email: string;

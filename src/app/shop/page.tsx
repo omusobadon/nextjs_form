@@ -19,7 +19,7 @@ export default function shop () {
         
     <div className="sm:w-1/2 mb-10 px-4">
     <div className="rounded-lg w-6/12 h-auto overflow-hidden">
-    <Link href={'shop/Tokyo/Shinjuku'}>
+    <Link href={'shop/Shinjuku'}>
     <Image src={Shop1} alt="Shop1" className="object-cover object-center h-full w-full"/>
     新宿本店
     </Link>
@@ -28,7 +28,7 @@ export default function shop () {
 
     <div className="sm:w-1/2 mb-10 px-4">
     <div className="rounded-lg w-6/12 h-auto overflow-hidden">
-    <Link href={'shop/Saitama/Urawa'}>
+    <Link href={'shop/Urawa'}>
     <Image src={Shop2} alt="Shop1" className="object-cover object-center h-full w-full"/>
     浦和支店
     </Link>

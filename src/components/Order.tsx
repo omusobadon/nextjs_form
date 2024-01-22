@@ -9,7 +9,7 @@ import Car5 from "../../public/img/Car5.png";
 import Car6 from "../../public/img/Car6.png";
 import {  format } from 'date-fns'
 import { utcToZonedTime } from 'date-fns-tz'
-import styles from './Dase.module.css'
+import { useSession, signOut } from "next-auth/react";
 
 
 interface OrderProps {
@@ -23,11 +23,16 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     const [starttime,setStarttime] = useState('')
     const [end,setEnd] = useState('')
     const [endtime,setEndtime] = useState('')
-    const [remark1,setRemark1] = useState('')
-    const [remark2,setRemark2] = useState('')
+    const [remark,setRemark] = useState('')
     const [product,setProduct] = useState<number>()
 
 
+
+    const { data: session, status } = useSession();
+    const Detalis = () => {
+      console.log(session);
+    };
+  
 //onChangeの関数
 
 
@@ -47,10 +52,11 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
 
     const handleSubmit  =  async (e: FormEvent) => {
       e.preventDefault(); await PostOrder({
-      customer_id: 1,
+
+      customer_id: 8,
       start_at: start + starttime,
       end_at: end + endtime,
-      remark: remark1 + "から" + remark2,
+      remark:  remark,
       detail: [
         {   
             stock_id:  product ,
@@ -59,12 +65,24 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     ]
     
     });
-  };
+
+    if(window.confirm('送信してよろしいですか？')){
+      return true;
+  }
+  else{ 
+      window.alert('キャンセルされました'); 
+      return false; 
+
+  }};
 
   const utcDate = new Date()
   const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo')
   const jstString = format(jstDate, 'yyyy-MM-dd')
   console.log(jstString)
+
+
+
+
 
   const car1 =   1 + StockShop;
   const car2 =   3 + StockShop;
@@ -77,10 +95,17 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
         
     <>      
 
-        <form onSubmit={handleSubmit} className="w-10/12 mx-auto md:max-w-md">
 
-            <div className="mb-4">
-            
+
+
+
+        <form onSubmit={handleSubmit} className="w-10/12 mx-auto md:max-w-md">
+        
+        
+        <div className="flex">
+
+
+            <div className="md-4 pl-1 pr-2  py-2">
             <input
           type="radio"
           id="Car1"
@@ -89,7 +114,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
           value={car1}
           required
           className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
-        <label htmlFor="Car1" className="inline-flex items-center justify-between w-6/12 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
+        <label htmlFor="Car1" className="inline-flex items-center justify-between w-48 p-5  text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
             <div className="block">
                 <div className="w-1/12 text-sm font-semibold">Buggy</div>
                 <div className="text-xs">aa</div>
@@ -98,7 +123,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
             <Image src={Car1} alt="Car1" className="flex w-1/4 h-auto"/></label>
         </div>
 
-        <div className="mb-4">
+        <div className="md-4 pr-1 pl-2 py-2">
         
             <input
           type="radio"
@@ -108,7 +133,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
           value={car2}
           required
           className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
-        <label htmlFor="Car2" className="inline-flex items-center justify-between w-6/12 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <label htmlFor="Car2" className="inline-flex items-center justify-between w-48 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div className="block">
                 <div className="w-1/12 text-sm font-semibold">Motorcycle</div>
                 <div className="text-xs">aa</div>
@@ -116,8 +141,11 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
             </div>
           <Image src={Car2} alt="Car2"  className="flex w-1/4 h-auto"/></label>
         </div>
-        <div className="mb-4">
-        
+
+      </div>
+      <div className="flex ">
+
+        <div className="md-4 pl-1 pr-2 py-2">
         <input
       type="radio"
       id="Car3"
@@ -126,7 +154,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
       value={car3}
       required
       className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
-    <label htmlFor="Car3" className="inline-flex items-center justify-between w-6/12 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <label htmlFor="Car3" className="inline-flex items-center justify-between w-48 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="block">
             <div className="w-1/12 text-sm font-semibold">Itasha</div>
             <div className="text-xs">aa</div>
@@ -135,7 +163,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
       <Image src={Car3} alt="Car3"  className="flex w-1/4 h-auto"/></label>
     </div>
 
-    <div className="mb-4">
+    <div className="md-4 pr-1 pl-2 py-2">
         
         <input
       type="radio"
@@ -145,7 +173,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
       value={car4}
       required
       className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
-    <label htmlFor="Car4" className="inline-flex items-center justify-between w-6/12 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <label htmlFor="Car4" className="inline-flex items-center justify-between w-48 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="block">
             <div className="w-1/12 text-sm font-semibold">Van</div>
             <div className="text-xs">aa</div>
@@ -153,7 +181,13 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
         </div>
       <Image src={Car4} alt="Car4"  className="flex w-1/4 h-auto"/></label>
     </div>
-    <div className="mb-4">
+
+</div>
+    <div className="flex ">
+
+
+
+    <div className="md-4 pl-1 pr-2 py-2">
         
         <input
       type="radio"
@@ -163,7 +197,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
       value={car5}
       required
       className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
-    <label htmlFor="Car5" className="inline-flex items-center justify-between w-6/12 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <label htmlFor="Car5" className="inline-flex items-center justify-between w-48 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="block">
             <div className="w-1/12 text-sm font-semibold">Convertible</div>
             <div className="text-xs">aa</div>
@@ -172,7 +206,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
       <Image src={Car5} alt="Car5"  className="flex w-1/4 h-auto"/></label>
     </div>
 
-       <div className="mb-4">
+       <div className="md-4 pr-1 pl-2 py-2">
         
             <input
           type="radio"
@@ -182,7 +216,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
           value={car6}
           required
           className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
-        <label htmlFor="Car6" className="inline-flex items-center justify-between w-6/12 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <label htmlFor="Car6" className="inline-flex items-center justify-between w-48 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div className="block">
                 <div className="w-1/12 text-sm font-semibold">Truck</div>
                 <div className="text-xs">aa</div>
@@ -191,30 +225,29 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
           <Image src={Car6} alt="Car6"  className="flex w-1/4 h-auto"/></label>
         </div>
 
-
+</div>
+<br />
+<br />
 
         <div className="mb-2">
                  <select
-                    name="remark1"
-                    onChange={(e) =>
-                        setRemark1(e.target.value)}
                         required
                         className='w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50'>
-                    <option value={StartShop}>{StartShop}</option>
+                    <option>{StartShop}</option>
 
                 </select>
             </div>
             <div className="mb-8">
                             <select
-                    name="remark2"
+                    name="remark"
                     onChange={(e) =>
-                        setRemark2(e.target.value)}
+                        setRemark(e.target.value)}
                         required
                         className='w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50'>
                     
                     <option value="" hidden>返却店舗を選択してください</option>
-                    <option value="新宿本店">新宿本店</option>
-                    <option value="浦和支店">浦和支店</option>
+                    <option value="返却は新宿本店">新宿本店</option>
+                    <option value="返却は浦和支店">浦和支店</option>
                 </select>
             </div>
 
@@ -329,10 +362,14 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
 
             <button
                     type="submit"
-                    name="submit">
+                    name="submit"
+                    className="flex mx-auto text-white bg-yellow-400 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-300 rounded text-lg">
                     送信  </button>
 
         </form>
+        <div className="h-screen">
+     
+    </div>
 
 
 

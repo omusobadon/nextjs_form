@@ -18,9 +18,10 @@ export async function getCustomerData() {
     const mail = alldata.email; // API応答のキーによって変わる可能性がある
     const phone = alldata.phone; // このキーもAPIの応答に依存します
     const password = alldata.password;
+    const id = alldata.id;
 
     // 整理したデータを返す
-    return { alldata, name, mail, phone, password };
+    return { alldata, name, mail, phone, password, id};
   } catch (error) {
     // エラーハンドリング
     console.error("Error fetching customer data:", error);

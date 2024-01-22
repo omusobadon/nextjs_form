@@ -1,7 +1,5 @@
 'use client'
 import React from "react";
-import { GetStock } from "@/api";
-import Order from "@/components/Order";
 import Header from "@/components/Head";
 import Footer from "@/components/Foot";
 import Image from "next/image";
@@ -30,17 +28,20 @@ export default function Home() {
                   Welcome
                 </h1>
 
-                <p className="mb-6 text-gray-500 sm:text-lg md:mb-8">
+                <div className="mb-6 text-gray-500 sm:text-lg md:mb-8">
                   オムそばどん予約システムのでも画面になります。
-                  <br />
+
                   <a
                     href="/shop"
                     className="text-yellow-400 underline transition duration-100 hover:text-yellow-300 active:text-yellow-400 "
-                  >
+                  ><br />
                     店舗一覧
                   </a>
-                  から予約を開始したい店舗を検索してください。
-                </p>
+                  から予約を開始したい店舗を選択してください。
+                  <p className="text-black text-sm">※予約には事前にログインしていただく必要があります。</p>
+                </div>
+
+
                 <br />
                 <br />
 
@@ -50,7 +51,7 @@ export default function Home() {
 
                 <div className="mb-6 text-gray-500 sm:text-lg md:mb-8">
                   容易に予約処理を実装できるオープンソースを前提として開発した予約システムのこと。具体的には、ユーザが直感的に使用でき、かつ必要に応じて機能拡張やカスタマイズが可能な予約システムの基盤を構築している。これにより、レンタル業界全体の効率化と、エンドユーザーの利便性を向上させることが可能となる。
-                  <p>※ユーザとは開発者のことです。</p>
+                  <p className="text-black text-sm">※ユーザとは開発者のことです。</p>
                 </div>
               </div>
             </div>
