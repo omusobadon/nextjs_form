@@ -9,7 +9,6 @@ import Car5 from "../../public/img/Car5.png";
 import Car6 from "../../public/img/Car6.png";
 import {  format } from 'date-fns'
 import { utcToZonedTime } from 'date-fns-tz'
-import { useSession, signOut } from "next-auth/react";
 
 
 interface OrderProps {
@@ -18,7 +17,6 @@ interface OrderProps {
   }
 
 export default function Order ({ StockShop , StartShop } : OrderProps) {
-
     const [start,setStart] = useState('')
     const [starttime,setStarttime] = useState('')
     const [end,setEnd] = useState('')
@@ -26,30 +24,17 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     const [remark,setRemark] = useState('')
     const [product,setProduct] = useState<number>()
 
-
-
-    const { data: session, status } = useSession();
-    const Detalis = () => {
-      console.log(session);
-    };
-  
 //onChangeの関数
-
-
     const changeStart = (e: React.ChangeEvent<HTMLInputElement>) =>
     setStart(e.target.value)
-
     const changeEnd =  (e: React.ChangeEvent<HTMLInputElement>) =>
     setEnd(e.target.value);
-
     const changeProduct = (e: React.ChangeEvent<HTMLInputElement>) =>
     {  let changeValue: number =  Number(e.target.value);
         setProduct(changeValue)
     };
-
     
 //submitの関数
-
     const handleSubmit  =  async (e: FormEvent) => {
       e.preventDefault(); await PostOrder({
 
@@ -63,12 +48,10 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
             qty: 1 
         }
     ]
-    
+
     });
 
-    if (stock_id == 'undefined'){
-      
-    } 
+    
 
     if(window.confirm('送信してよろしいですか？')){
       return true;
@@ -76,14 +59,11 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
   else{ 
       window.alert('キャンセルされました'); 
       return false; 
-
   }};
-
   const utcDate = new Date()
   const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo')
   const jstString = format(jstDate, 'yyyy-MM-dd')
-
-
+  console.log(jstString)
 
 
 
@@ -93,21 +73,13 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
   const car4 =   7 + StockShop;
   const car5 =   9 + StockShop;
   const car6 =   11 + StockShop;
-
   return (
         
     <>      
-
-
-
-
-
         <form onSubmit={handleSubmit} className="w-10/12 mx-auto md:max-w-md">
         
         
         <div className="flex">
-
-
             <div className="md-4 pl-1 pr-2  py-2">
             <input
           type="radio"
@@ -125,7 +97,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
             </div>
             <Image src={Car1} alt="Car1" className="flex w-1/4 h-auto"/></label>
         </div>
-
         <div className="md-4 pr-1 pl-2 py-2">
         
             <input
@@ -144,10 +115,8 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
             </div>
           <Image src={Car2} alt="Car2"  className="flex w-1/4 h-auto"/></label>
         </div>
-
       </div>
       <div className="flex ">
-
         <div className="md-4 pl-1 pr-2 py-2">
         <input
       type="radio"
@@ -165,7 +134,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
         </div>
       <Image src={Car3} alt="Car3"  className="flex w-1/4 h-auto"/></label>
     </div>
-
     <div className="md-4 pr-1 pl-2 py-2">
         
         <input
@@ -184,12 +152,8 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
         </div>
       <Image src={Car4} alt="Car4"  className="flex w-1/4 h-auto"/></label>
     </div>
-
 </div>
     <div className="flex ">
-
-
-
     <div className="md-4 pl-1 pr-2 py-2">
         
         <input
@@ -208,7 +172,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
         </div>
       <Image src={Car5} alt="Car5"  className="flex w-1/4 h-auto"/></label>
     </div>
-
        <div className="md-4 pr-1 pl-2 py-2">
         
             <input
@@ -227,17 +190,14 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
             </div>
           <Image src={Car6} alt="Car6"  className="flex w-1/4 h-auto"/></label>
         </div>
-
 </div>
 <br />
 <br />
-
         <div className="mb-2">
                  <select
                         required
                         className='w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50'>
                     <option>{StartShop}</option>
-
                 </select>
             </div>
             <div className="mb-8">
@@ -253,7 +213,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
                     <option value="返却は浦和支店">浦和支店</option>
                 </select>
             </div>
-
         <div className="mb-2">
             <input
           type="date" 
@@ -262,7 +221,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
           onChange={changeStart}
                  className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50"/>
         </div>
-
         <div className="mb-8">
         <select
                     name="starttime"
@@ -307,7 +265,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
                     <option value="T22:00:00+09:00">22:00</option>
                 </select>
             </div>
-
             <div className="mb-2">
             <input
           type="date" 
@@ -316,8 +273,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
           onChange={changeEnd}
                  className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50"/>
         </div>
-
-
         <div className="mb-8">
         <select
                     name="endtime"
@@ -362,22 +317,16 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
                     <option value="T22:00:00+09:00">22:00</option>
                 </select>
             </div>
-
             <button
                     type="submit"
                     name="submit"
                     className="flex mx-auto text-white bg-yellow-400 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-300 rounded text-lg">
                     送信  </button>
-
         </form>
         <div className="h-screen">
      
     </div>
-
-
-
    
 </>
   )
 }
-

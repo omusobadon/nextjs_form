@@ -14,7 +14,7 @@ export interface OrderPost {
     end_at: string;
     remark: string;
     detail: [{   
-            stock_id:number;
+            stock_id?:number;
             qty: number;
         }]
 }
