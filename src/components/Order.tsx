@@ -53,7 +53,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     const handleSubmit  =  async (e: FormEvent) => {
       e.preventDefault(); await PostOrder({
 
-      customer_id: 8,
+      customer_id: 1,
       start_at: start + starttime,
       end_at: end + endtime,
       remark:  remark,
@@ -65,6 +65,10 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     ]
     
     });
+
+    if (stock_id == 'undefined'){
+      
+    } 
 
     if(window.confirm('送信してよろしいですか？')){
       return true;
@@ -78,7 +82,6 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
   const utcDate = new Date()
   const jstDate = utcToZonedTime(utcDate, 'Asia/Tokyo')
   const jstString = format(jstDate, 'yyyy-MM-dd')
-  console.log(jstString)
 
 
 

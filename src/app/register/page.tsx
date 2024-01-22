@@ -89,7 +89,7 @@ export default function Register() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const emailAvailable = await checkEmail(session?.user?.mail);
+        const emailAvailable = await checkEmail(session?.user?.email);
         if (!isLoggedin) {
           if (!emailAvailable) {
             router.push("/register");
