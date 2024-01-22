@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import axios from "axios";
 
 export default function Login() {
@@ -71,6 +72,7 @@ export default function Login() {
     formData.append("mail", email);
     formData.append("password", password);
     await authenticate(undefined, formData);
+
   };
 
   return (
@@ -135,7 +137,7 @@ export default function Login() {
               <Button
                 className="w-full bg-indigo-500 hover:bg-indigo-600 text-white"
                 type="submit"
-              >
+              >  
                 Log In
               </Button>
             </form>

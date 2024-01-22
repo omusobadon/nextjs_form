@@ -14,7 +14,7 @@ export interface OrderPost {
     end_at: string;
     remark: string;
     detail: [{   
-            stock_id:number;
+            stock_id?:number;
             qty: number;
         }]
 }
@@ -42,14 +42,12 @@ export interface StockGet {
     remark: string
 }
 
-//予約
 
 
 //お問い合わせ
 
 export interface Inquiry {
 
-    id: string;
     Lname: string;
     Fname: string;
     Email: string;

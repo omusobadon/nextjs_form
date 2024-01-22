@@ -25,7 +25,7 @@ export interface ProductInt {
   export interface customerInt {
     id: number;
     name: string;
-    mail: string;
+    mail?: string;
     phone: string;
     password: string;
   }

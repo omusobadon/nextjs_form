@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { checkEmail } from "@/lib/apidata";
 
@@ -20,10 +22,14 @@ export default function Home() {
           <h1>ようこそ, {session.user?.email}</h1>
           <p>あなたの名前は{session.user?.name}です</p>
           {session.user?.image && (
-            <img src={session.user.image} alt="User Image" />
+            <Image src={session.user.image} alt="User Image" />
           )}
+
           <button onClick={() => Detalis()}>詳細</button>
           <button onClick={() => signOut()}>ログアウト</button>
+          <Link href={"/"}>
+                <span className="ml-3">戻る</span>
+              </Link>
         </div>
       )}
     </div>

@@ -56,7 +56,11 @@ export default function Register() {
       // セッションがない場合のみメールアドレスのチェックを行う
       const emailAvailable = await checkEmail(formData.mail);
       const phoneAvailable = await checkEmail(formData.phone);
-      const sessionEmailAvailable = await checkEmail(session?.user?.email);
+      const  sessionEmailAvailable = session?.user?.email 
+  ? await checkEmail(session.user.email)
+  : false;
+      
+
       if (emailAvailable || phoneAvailable || sessionEmailAvailable) {
         setErrorMessage("このメールアドレスは既に使用されています。");
         return;
@@ -89,7 +93,11 @@ export default function Register() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const emailAvailable = await checkEmail(session?.user?.mail);
+        const  emailAvailable = session?.user?.email 
+        ? await checkEmail(session.user.email)
+        : false;
+
+
         if (!isLoggedin) {
           if (!emailAvailable) {
             router.push("/register");
@@ -235,7 +243,7 @@ export default function Register() {
               <Button
                 className=" bg-white hover:bg-white hover:underline text-black"
                 /* サインアウト後/loginにリダイレクト*/
-                onClick={() => signOut({ callbackUrl: "/login" })}
+                onClick={() => signOut({ callbackUrl: "/" })}
               >
                 Sign Out
               </Button>
