@@ -20,7 +20,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     const [start,setStart] = useState('')
     const [starttime,setStarttime] = useState('')
     const [end,setEnd] = useState('')
-    const [endtime,setEndtime] = useState('')
+    const [etime,setEtime] = useState('')
     const [remark,setRemark] = useState('')
     const [product,setProduct] = useState<number>()
 
@@ -38,9 +38,9 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
     const handleSubmit  =  async (e: FormEvent) => {
       e.preventDefault(); await PostOrder({
 
-      customer_id: 1,
+      customer_id: 6,
       start_at: start + starttime,
-      end_at: end + endtime,
+      end_at: end + etime,
       remark:  remark,
       detail: [
         {   
@@ -128,7 +128,7 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
       className="hidden peer w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50" />
     <label htmlFor="Car3" className="inline-flex items-center justify-between w-48 p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-yellow-300 peer-checked:border-yellow-400 peer-checked:text-yellow-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="block">
-            <div className="w-1/12 text-sm font-semibold">Itasha</div>
+            <div className="w-1/12 text-sm font-semibold">ピンクカー</div>
             <div className="text-xs">aa</div>
             <div className="text-xs">aa</div>
         </div>
@@ -275,9 +275,9 @@ export default function Order ({ StockShop , StartShop } : OrderProps) {
         </div>
         <div className="mb-8">
         <select
-                    name="endtime"
+                    name="etime"
                     onChange={(e) =>
-                        setEndtime(e.target.value)}
+                        setEtime(e.target.value)}
                         required
                         className='w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-yellow-400 placeholder-gray-500 placeholder-opacity-50'>
                     
